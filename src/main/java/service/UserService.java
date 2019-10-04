@@ -1,5 +1,6 @@
 package service;
 
+import DAO.UserDAO;
 import DAO.UserDaoJDBCImpl;
 import model.User;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class UserService {
     private static UserService userService;
-    private static UserDaoJDBCImpl userDaoJDBCImpl = new UserDaoJDBCImpl();
+    private static UserDAO userDaoJDBCImpl = new UserDaoJDBCImpl();
 
     private UserService() {
 

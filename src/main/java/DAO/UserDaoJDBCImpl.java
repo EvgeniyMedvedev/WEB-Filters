@@ -94,6 +94,7 @@ public class UserDaoJDBCImpl implements UserDAO {
         }
     }
 
+    @Override
     public void updateUser(User user,String firstName,String lastName){
         try {
             PreparedStatement statement = connection.prepareStatement("update db_example.users set name=?,surname=? where id=?");
