@@ -106,7 +106,7 @@ public class UserDAO implements BaseDAO<User> {
             e.printStackTrace();
         }
     }
-
+    //я изменение гы
     public void dropTable() {
         try {
             PreparedStatement statement = connection.prepareStatement("DROP TABLE IF EXISTS users");
