@@ -1,18 +1,13 @@
 package service;
 
-import DAO.UserDAO;
+import DAO.UserDaoJDBCImpl;
 import model.User;
-import org.postgresql.Driver;
-import util.DBHelper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
     private static UserService userService;
-    private static UserDAO userDAO = getUserDAO();
+    private static UserDaoJDBCImpl userDaoJDBCImpl = new UserDaoJDBCImpl();
 
     private UserService() {
 
@@ -26,30 +21,26 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userDAO.getAll();
+        return userDaoJDBCImpl.getAll();
     }
 
     public void addUser(User user) {
-        userDAO.add(user);
+        userDaoJDBCImpl.add(user);
     }
 
     public void deleteUser(User user) {
-        userDAO.delete(user);
+        userDaoJDBCImpl.delete(user);
     }
 
     public boolean updateUser(User user,String name,String surName) {
         user.setFirstName(name);
         user.setLastName(surName);
-        userDAO.updateUser(user, name,surName);
+        userDaoJDBCImpl.updateUser(user, name,surName);
         return true;
     }
 
     public User getUserById(long id) {
-        return getUserDAO().getById(id);
-    }
-
-    private static UserDAO getUserDAO() {
-        return new UserDAO();
+        return userDaoJDBCImpl.getById(id);
     }
 
 
