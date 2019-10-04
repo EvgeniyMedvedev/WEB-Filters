@@ -1,6 +1,7 @@
 package DAO;
 
 import model.User;
+import util.DBHelper;
 
 
 import java.sql.Connection;
@@ -10,14 +11,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements BaseDAO<User> {
     private Connection connection;
 
-    public UserDAO(Connection connection){
-        this.connection = connection;
+    public UserDAO(){
+        this.connection = DBHelper.getPostgresqlConnection();
     }
 
-    public List<User> getAllUsers(){
+    @Override
+    public List<User> getAll() {
         List<User> list = new ArrayList();
         try {
             PreparedStatement statement = connection.prepareStatement("select * from db_example.users");
@@ -54,7 +56,8 @@ public class UserDAO {
         return id;
     }
 
-    public void addUser(User user){
+    @Override
+    public void add(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("insert into db_example.users values (?,?,?)");
             long id = getLastId() + 1;
@@ -69,33 +72,18 @@ public class UserDAO {
         }
     }
 
-    public User getUserById(long id){
-        for (User user:getAllUsers()){
+    @Override
+    public User getById(long id) {
+        for (User user:getAll()){
             if (id == user.getId()){
                 return user;
             }
         }
         return null;
-//        User user = null;
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("select * from db_example.users where id=?");
-//            statement.setLong(1, id);
-//            statement.executeUpdate();
-//            ResultSet result = statement.getResultSet();
-//            result.next();
-//            String name = result.getString("Имя");
-//            String surName = result.getString("Фамилия");
-//            user = new User(id, name, surName);
-//            result.close();
-//            statement.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-//        return user;
     }
 
-    public void deleteUser(User user){
+    @Override
+    public void delete(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("delete from db_example.users where id=?");
             statement.setLong(1,user.getId());
