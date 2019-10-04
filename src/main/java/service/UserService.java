@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserService {
     private static UserService userService;
-    private static UserDAO userDaoJDBCImpl = new UserDaoJDBCImpl();
+    private static UserDAO userDAO = new UserDaoJDBCImpl();
 
     private UserService() {
 
@@ -22,26 +22,26 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userDaoJDBCImpl.getAll();
+        return userDAO.getAll();
     }
 
     public void addUser(User user) {
-        userDaoJDBCImpl.add(user);
+        userDAO.add(user);
     }
 
     public void deleteUser(User user) {
-        userDaoJDBCImpl.delete(user);
+        userDAO.delete(user);
     }
 
     public boolean updateUser(User user,String name,String surName) {
         user.setFirstName(name);
         user.setLastName(surName);
-        userDaoJDBCImpl.updateUser(user, name,surName);
+        userDAO.updateUser(user, name,surName);
         return true;
     }
 
     public User getUserById(long id) {
-        return userDaoJDBCImpl.getById(id);
+        return userDAO.getById(id);
     }
 
 
