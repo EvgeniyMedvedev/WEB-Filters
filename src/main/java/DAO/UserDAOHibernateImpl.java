@@ -44,8 +44,7 @@ public class UserDAOHibernateImpl implements UserDAO {
 //        }
 //        return null;
         Query query = session.createQuery("from User where id =: idUser");
-        List list = query.setParameter("idUser",id).list();
-        return (User) list.get(0);
+        return (User) query.setParameter("idUser",id).uniqueResult();
 
     }
 
