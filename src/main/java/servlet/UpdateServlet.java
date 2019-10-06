@@ -27,13 +27,16 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("first_name");
         String surName = req.getParameter("last_name");
 
-        User user = service.getUserById(id);
-
-        service.updateUser(user,name,surName);
+        if (service.validId(id) && name != null && surName != null){
+            service.updateUser(id,name,surName);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }else {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
 
         resp.sendRedirect(req.getContextPath() + "/");
 

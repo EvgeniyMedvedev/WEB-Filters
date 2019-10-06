@@ -16,8 +16,14 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Integer id = Integer.valueOf(req.getParameter("id"));
-        service.deleteUser(service.getUserById(id));
+        int id = Integer.parseInt(req.getParameter("id"));
+        if (service.validId(id)){
+            service.deleteUser(id);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        }else {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+
         resp.sendRedirect(req.getContextPath() + "/");
     }
 }

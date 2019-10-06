@@ -83,10 +83,10 @@ public class UserDaoJDBCImpl implements UserDAO {
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(long id) {
         try {
             PreparedStatement statement = connection.prepareStatement("delete from db_example.users where id=?");
-            statement.setLong(1,user.getId());
+            statement.setLong(1,id);
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
@@ -95,12 +95,12 @@ public class UserDaoJDBCImpl implements UserDAO {
     }
 
     @Override
-    public void updateUser(User user,String firstName,String lastName){
+    public void updateUser(long id,String firstName,String lastName){
         try {
             PreparedStatement statement = connection.prepareStatement("update db_example.users set name=?,surname=? where id=?");
             statement.setString(1,firstName);
             statement.setString(2,lastName);
-            statement.setLong(3,user.getId());
+            statement.setLong(3,id);
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
