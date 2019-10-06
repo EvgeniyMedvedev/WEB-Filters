@@ -9,6 +9,7 @@ import util.DBHelper;
 import java.util.List;
 
 public class UserDAOHibernateImpl implements UserDAO {
+
     private Session session;
 
     public UserDAOHibernateImpl() {
@@ -23,8 +24,9 @@ public class UserDAOHibernateImpl implements UserDAO {
 
     @Override
     public void add(User user) {
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
         try {
+            transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
         } catch (RuntimeException e) {
@@ -45,8 +47,10 @@ public class UserDAOHibernateImpl implements UserDAO {
 
     @Override
     public void delete(User user) {
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = null;
+
         try {
+            transaction = session.beginTransaction();
             Query query = session.createQuery("delete User where id =: idUser");
             query.setParameter("idUser", user.getId()).executeUpdate();
             transaction.commit();

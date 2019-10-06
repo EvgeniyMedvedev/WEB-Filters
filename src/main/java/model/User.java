@@ -17,7 +17,6 @@ public class User {
     @Column(name = "surname")
     private String lastName;
 
-
     public User(){
 
     }

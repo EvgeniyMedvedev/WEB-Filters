@@ -23,7 +23,7 @@ public class DBHelper {
 
     @SuppressWarnings("UnusedDeclaration")
     private static SessionFactory createSessionFactory() {
-        Configuration configuration = getPostgresqlConfiguration();
+        Configuration configuration = getPostgresConfiguration();
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         ServiceRegistry serviceRegistry = builder.build();
@@ -31,7 +31,7 @@ public class DBHelper {
 
     }
 
-    private static Configuration getPostgresqlConfiguration() {
+    private static Configuration getPostgresConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
 
@@ -41,11 +41,11 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.connection.password", "root");
         configuration.setProperty("hibernate.show_sql", "true");
-        configuration.setProperty("hibernate.hbm2ddl.auto", "create");
+        configuration.setProperty("hibernate.hbm2ddl.auto", "update");
         return configuration;
     }
 
-    public static Connection getPostgresqlConnection() {
+    public static Connection getPostgresConnection() {
         try {
             Class.forName("org.postgresql.Driver");
 
