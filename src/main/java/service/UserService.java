@@ -3,14 +3,15 @@ package service;
 import DAO.UserDAO;
 import DAO.UserDAOHibernateImpl;
 import DAO.UserDaoJDBCImpl;
+import factory.UserDAOFactory;
 import model.User;
 
 import java.util.List;
 
 public class UserService {
     private static UserService userService;
-    private static UserDAO userDAO = new UserDaoJDBCImpl();
-    private static UserDAO userDAOHibernate = new UserDAOHibernateImpl();
+
+    private static UserDAO userDAO = UserDAOFactory.getUserDAO();
 
     private UserService() {
 
@@ -24,19 +25,19 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userDAOHibernate.getAll();
+        return userDAO.getAll();
     }
 
     public void addUser(User user) {
-        userDAOHibernate.add(user);
+        userDAO.add(user);
     }
 
     public void deleteUser(long id) {
-        userDAOHibernate.delete(id);
+        userDAO.delete(id);
     }
 
     public boolean updateUser(long idUser,String name,String surName) {
-        userDAOHibernate.updateUser(idUser, name,surName);
+        userDAO.updateUser(idUser, name,surName);
         return true;
     }
 
@@ -54,6 +55,6 @@ public class UserService {
     }
 
     public User getUserById(long id) {
-        return userDAOHibernate.getById(id);
+        return userDAO.getById(id);
     }
 }

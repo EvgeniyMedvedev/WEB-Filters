@@ -13,7 +13,7 @@ public class UserDAOHibernateImpl implements UserDAO {
     private Session session;
 
     public UserDAOHibernateImpl() {
-        session = DBHelper.getSessionFactory().openSession();
+        session = DBHelper.getInstance().getSessionFactory().openSession();
     }
 
     @Override
@@ -37,15 +37,8 @@ public class UserDAOHibernateImpl implements UserDAO {
 
     @Override
     public User getById(long id) {
-//        for (User user : getAll()) {
-//            if (user.getId() == id) {
-//                return user;
-//            }
-//        }
-//        return null;
         Query query = session.createQuery("from User where id =: idUser");
         return (User) query.setParameter("idUser",id).uniqueResult();
-
     }
 
     @Override

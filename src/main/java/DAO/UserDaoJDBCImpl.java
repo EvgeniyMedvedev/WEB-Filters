@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDAO {
     private Connection connection;
 
     public UserDaoJDBCImpl(){
-        this.connection = DBHelper.getPostgresConnection();
+        this.connection = DBHelper.getInstance().getPostgresConnection();
     }
 
     @Override
