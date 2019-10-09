@@ -24,7 +24,6 @@ public class DBHelper {
 
     }
 
-    //зачем ломать то что работает
     public static DBHelper getInstance() {
         if (helper == null) {
             helper = new DBHelper();
@@ -86,7 +85,7 @@ public class DBHelper {
                     append("jdbc:postgresql://").   //db type
                     append("localhost:").           //host name
                     append("5432/").                //port
-                    append("postgres");           //db name
+                    append("postgres");             //db name
 
             String login = "postgres";
             String pass = "root";

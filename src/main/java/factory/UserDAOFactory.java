@@ -8,17 +8,15 @@ import javax.servlet.ServletException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class UserDAOFactory {
-    private static FileInputStream file;
     private static Properties properties = new Properties();
 
     public static UserDAO getUserDAO(){
         try {
-            file = new FileInputStream("D:/#include/TrainingMaterial/JavaMentor/" +
-                        "PreProject/servlet-tutorial-lesson-01.get_started/One/src/main/resources/config.properties");
-            properties.load(file);
+            properties.load(UserDAOFactory.class.getResourceAsStream("/config.properties"));
         } catch (Exception e) {
             e.printStackTrace();
         }
