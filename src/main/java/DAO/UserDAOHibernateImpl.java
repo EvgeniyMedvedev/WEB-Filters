@@ -73,4 +73,48 @@ public class UserDAOHibernateImpl implements UserDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean validateUser(String login, String password) {
+        Query query = session.createQuery("from User where login =: loginUser");
+        Query query1 = session.createQuery("from User where password =: passwordUser");
+        User u = (User) query.setParameter("loginUser",login).uniqueResult();
+        User r = (User) query1.setParameter("passwordUser",password).uniqueResult();
+        if (u.equals(r)){
+            return true;
+        }
+        return false;
+//        for (User user:getAll()){
+//            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
+//                return true;
+//            }
+//        }
+//        return false;
+    }
+
+    @Override
+    public String getRole(String login, String password) {
+        Query query = session.createQuery("from User where login =: loginUser");
+        Query query1 = session.createQuery("from User where password =: passwordUser");
+        User u = (User) query.setParameter("loginUser",login).uniqueResult();
+        User r = (User) query1.setParameter("passwordUser",password).uniqueResult();
+        String role = null;
+        if (u.equals(r)){
+            role = u.getRole();
+        }
+        return role;
+    }
+
+    @Override
+    public User getUserByLoginAndPassword(String login, String password) {
+        Query query = session.createQuery("from User where login =: loginUser");
+        Query query1 = session.createQuery("from User where password =: passwordUser");
+        User u = (User) query.setParameter("loginUser",login).uniqueResult();
+        User r = (User) query1.setParameter("passwordUser",password).uniqueResult();
+        if (u.equals(r)){
+            return u;
+        }
+        return null;
+
+    }
 }

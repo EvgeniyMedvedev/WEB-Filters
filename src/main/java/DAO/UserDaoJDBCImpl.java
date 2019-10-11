@@ -107,6 +107,22 @@ public class UserDaoJDBCImpl implements UserDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean validateUser(String login, String password) {
+        return false;
+    }
+
+    @Override
+    public String getRole(String login, String password) {
+        return null;
+    }
+
+    @Override
+    public User getUserByLoginAndPassword(String login, String password) {
+        return null;
+    }
+
     //я изменение гы
     public void dropTable() {
         try {

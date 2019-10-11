@@ -18,7 +18,7 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
-        Integer id = Integer.valueOf(req.getParameter("id"));
+        int id = Integer.parseInt(req.getParameter("id"));
         User user = service.getUserById(id);
         req.setAttribute("user",user);
         req.getRequestDispatcher("/WEB-INF/view/update.jsp").forward(req,resp);
@@ -38,7 +38,7 @@ public class UpdateServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/admin");
 
     }
 }

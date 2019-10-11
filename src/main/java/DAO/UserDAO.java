@@ -16,4 +16,10 @@ public interface UserDAO {
     void delete(long id);
 
     void updateUser(long idUser, String name, String surName);
+
+    boolean validateUser(String login, String password);
+
+    String getRole(String login, String password);
+
+    User getUserByLoginAndPassword(String login, String password);
 }

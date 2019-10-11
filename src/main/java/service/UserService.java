@@ -28,6 +28,18 @@ public class UserService {
         return userDAO.getAll();
     }
 
+    public User getUserById(long id) {
+        return userDAO.getById(id);
+    }
+
+    public User getUserByLoginAndPassword(String login, String password) {
+        return userDAO.getUserByLoginAndPassword(login,password);
+    }
+
+    public String getRole(String login, String password){
+        return userDAO.getRole(login,password);
+    }
+
     public void addUser(User user) {
         userDAO.add(user);
     }
@@ -54,7 +66,8 @@ public class UserService {
 
     }
 
-    public User getUserById(long id) {
-        return userDAO.getById(id);
+    public boolean validateUser(String login,String password){
+        return userDAO.validateUser(login,password);
     }
+
 }

@@ -21,14 +21,15 @@ public class AddServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         String firstName = req.getParameter("first_name");
         String lastName = req.getParameter("last_name");
+        String role = req.getParameter("role");
         if (firstName != null || lastName != null || !firstName.isEmpty() || !lastName.isEmpty()) {
-            service.addUser(new User(firstName, lastName));
+            service.addUser(new User(firstName, lastName,role));
             resp.setStatus(HttpServletResponse.SC_OK);
         } else {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/admin");
     }
 
 }
